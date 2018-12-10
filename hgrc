@@ -1,0 +1,34 @@
+[ui]
+username = ctembreull <ctembreull@skytap.com>
+editor = vim
+merge = internal:merge
+
+[extensions]
+mq =
+rebase =
+graphlog =
+pager =
+color =
+fetch =
+record =
+transplant =
+purge =
+shelve =
+prompt = /home/vagrant/hg-prompt/prompt.py
+histedit =
+
+[pager]
+pager = LESS='FRX' less
+
+[alias]
+qstatus = status --rev -2:.
+
+[hooks]
+# Prevents data corruption in cases involving subrepositories and MQ patches.
+# Specifically, corruption can occur in newer versions of Mercurial (e.g, 2.0.2)
+# if a changeset is pushed from the containing repo while there is a subrepo with an MQ patch applied.
+[hooks]
+pre-qfinish = ! test -e .hgsub || for repo in `awk '{print $1}' .hgsub` ; do cd $repo && hg qtop &>/dev/null && exit 255 ; cd .. ;  done
+pre-commit = ! test -e .hgsub || for repo in `awk '{print $1}' .hgsub` ; do cd $repo && hg qtop &>/dev/null && exit 255 ; cd .. ;  done
+pre-qnew = ! test -e .hgsub || for repo in `awk '{print $1}' .hgsub` ; do cd $repo && hg qtop &>/dev/null && exit 255 ; cd .. ;  done
+pre-qrefresh = ! test -e .hgsub || for repo in `awk '{print $1}' .hgsub` ; do cd $repo && hg qtop &>/dev/null && exit 255 ; cd .. ;  done
