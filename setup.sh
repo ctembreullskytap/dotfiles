@@ -1,24 +1,28 @@
 # 1. Setup ZSH and make it the default
-echo -e "\nSetting up ZShell (zsh) and making it the default login environment\n"
-sudo apt-get install -qy zsh
-chsh -s $(which zsh)
+if ! [ $(test -e "/usr/bin/zsh")  ] ; then
+    echo -e "\nSetting up ZShell (zsh) and making it the default login environment"
+    sudo apt-get install -qy zsh
+    chsh -s $(which zsh)
+fi
 
 # 2. Add oh-my-zsh for pure awesomeness
-echo -e "\nAdding robbyrussell/oh-my-zsh toolkit\n"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+if ! [ $(test -f "${HOME}/.oh-my-zsh") ] ; then
+    echo -e "\nAdding robbyrussell/oh-my-zsh toolkit"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
 
 # 3. Adding dotfiles
-echo -e "\nReplacing default dotfiles with customized versions\n"
+echo -e "\nReplacing default dotfiles with customized versions:"
 declare -a files=("hgrc", "zshrc", "zshenv")
 for f in "${files[@]}"; do
-    echo -e "\nChecking ${f}..."
+    echo -e "\n\tChecking ${f}..."
     if test -e "${HOME}/.${f}"; then
         echo -e " found. Backing up..."
         mv "${HOME}/.${f}" "${HOME}/.backup_${f}"
         echo -e " done."
     fi
     echo -e " Replacing..."
-    mv "${pwd}/${f}" "${HOME}/.${f}"
+    mv "$(dirname -- $0)/${f}" "${HOME}/.${f}"
     echo -e " done."
 done
 echo "\nAll tasks complete. Exiting."
