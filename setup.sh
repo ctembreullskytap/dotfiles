@@ -22,7 +22,7 @@ for f in "${files[@]}"; do
         echo -e " done."
     fi
     echo -e " Replacing..."
-    mv "$(dirname -- $0)/${f}" "${HOME}/.${f}"
+    cp "$(dirname -- $0)/${f}" "${HOME}/.${f}"
     echo -e " done."
 done
 echo "\nAll tasks complete. Exiting."
