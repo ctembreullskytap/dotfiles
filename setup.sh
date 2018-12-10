@@ -1,3 +1,6 @@
+#1 download hg-prompt
+hg clone http://bitbucket.org/sjl/hg-prompt/ "${HOME}/hg-prompt"
+
 # 1. Setup ZSH and make it the default
 if ! [ $(test -e "/usr/bin/zsh")  ] ; then
     echo -ne "\nSetting up ZShell (zsh) and making it the default login environment"
