@@ -12,13 +12,13 @@ echo -e "\nReplacing default dotfiles with customized versions\n"
 declare -a files=("hgrc", "zshrc", "zshenv")
 for f in "${files[@]}"; do
     echo -e "\nChecking ${f}..."
-    if test -f "${HOME}/.${f}"; then
+    if test -e "${HOME}/.${f}"; then
         echo -e " found. Backing up..."
         mv "${HOME}/.${f}" "${HOME}/.backup_${f}"
         echo -e " done."
     fi
     echo -e " Replacing..."
-    mv "${f}" "${HOME}/.${f}"
+    mv "${pwd}/${f}" "${HOME}/.${f}"
     echo -e " done."
 done
 echo "\nAll tasks complete. Exiting."
