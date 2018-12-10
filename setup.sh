@@ -13,7 +13,7 @@ fi
 
 # 3. Adding dotfiles
 echo -e "\nReplacing default dotfiles with customized versions:"
-declare -a files=("hgrc", "zshrc", "zshenv")
+declare -a files=("hgrc", "zshrc", "zshenv" "oh-my-zsh/themes/ctembreull.zsh-theme")
 for f in "${files[@]}"; do
     echo -e "\n\tChecking ${f}..."
     if test -e "${HOME}/.${f}"; then
@@ -25,4 +25,6 @@ for f in "${files[@]}"; do
     cp "$(dirname -- $0)/${f}" "${HOME}/.${f}"
     echo -e " done."
 done
+
+# also the zsh theme
 echo "\nAll tasks complete. Exiting."
