@@ -16,7 +16,7 @@ fi
 
 # 3. Adding dotfiles
 echo -e "\nReplacing default dotfiles with customized versions:"
-declare -a files=("hgrc" "zshrc" "zshenv" "oh-my-zsh/themes/ctembreull.zsh-theme")
+declare -a files=("hgrc" "zshrc" "zshenv" "screenrc"  "oh-my-zsh/themes/ctembreull.zsh-theme")
 for f in "${files[@]}"; do
     echo -ne "\n\tChecking ${f}..."
     if test -e "${HOME}/.${f}"; then
